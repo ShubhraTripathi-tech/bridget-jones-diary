@@ -6,6 +6,25 @@ body {
   background-color: #f7f7f7;
 }
 
+.banner {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 300px;
+  background: 
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGdhejQ5cjR5b2w4endnczlkNHlnbzEwaW45cDBsNjU4eTE3c2IxbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S3KhNnHajzZ4voJKYP/giphy.gif");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
 h1 {
   text-align: center;
 }
@@ -39,4 +58,23 @@ li {
 
 .actions {
   margin-top: 10px;
+}
+
+#searchInput {
+  padding: 12px;
+  font-size: 16px;
+  border: 0px;
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+form + h2,
+#searchInput + h2 {
+  margin-top: 40px;
 }
