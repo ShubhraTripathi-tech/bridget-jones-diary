@@ -9,27 +9,29 @@
 </head>
 
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Diary App</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
 
-  <h1>My Diary</h1>
+  <div class="banner">
+    <h1>My Diary</h1>
+  </div>
 
-  <!-- create -->
-  <h2>Add Entry</h2>
-  <form id="entryForm">
-    <input id="title" placeholder="Title" required />
-    <textarea id="content" placeholder="Write your thoughts..." required></textarea>
-    <input id="category" placeholder="Category"/>
-    <button type="submit">Add Entry</button>
-  </form>
+  <div class="container">
+    <!-- create -->
+    <h2>Add Entry</h2>
+    <form id="entryForm">
+      <input id="title" placeholder="Title" required />
+      <textarea id="content" placeholder="Write your thoughts..." required></textarea>
+      <input id="category" placeholder="Category"/>
+      <button type="submit">Add Entry</button>
+    </form>
 
+    <!-- search -->
+    <h2>Search</h2>
+    <input id="searchInput" placeholder="Search your entries..."/>
 
+    <!-- entries -->
+    <h2>Entries</h2>
+    <div id="entries"></div>
+  </div>
 </body>
 </html>
 </body>
