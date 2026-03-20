@@ -1,4 +1,3 @@
-const { response } = require("../app");
 const db = require("../db/connect");
 
 class Diary {
@@ -44,6 +43,7 @@ class Diary {
     return new Diary(result.rows[0]);
   }
 
+  // delete an entry
   async destroy() {
     const result = await db.query(
       `DELETE FROM entries WHERE post_id = $1 RETURNING *;`,
