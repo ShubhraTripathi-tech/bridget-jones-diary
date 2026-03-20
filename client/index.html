@@ -1,38 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Diary</title>
-</head>
 
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Diary App</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
 
-  <h1>My Diary</h1>
+  <body>
+    <h1>📒 My Diary</h1>
 
-  <!-- create -->
-  <h2>Add Entry</h2>
-  <form id="entryForm">
-    <input id="title" placeholder="Title" required />
-    <textarea id="content" placeholder="Write your thoughts..." required></textarea>
-    <input id="category" placeholder="Category"/>
-    <button type="submit">Add Entry</button>
-  </form>
+    <!-- CREATE ENTRY -->
+    <section>
+      <h2>Add Entry</h2>
+      <form id="entryForm">
+        <input id="title" placeholder="Title" required />
+        <textarea
+          id="content"
+          placeholder="Write your thoughts..."
+          required
+        ></textarea>
+        <input id="category" placeholder="Category" required />
+        <input id="created_at" type="datetime-local" required />
+        <button type="submit">Add Entry</button>
+      </form>
+    </section>
 
+    <!-- SEARCH -->
+    <section>
+      <h2>Search</h2>
+      <input id="searchCategory" placeholder="Category" />
+      <input id="searchYear" placeholder="Year" />
+      <input id="searchMonth" placeholder="Month" />
+      <button onclick="searchEntries()">Search</button>
+      <button onclick="loadEntries()">Reset</button>
+    </section>
 
-</body>
-</html>
-</body>
-
-
+    <!-- ENTRIES LIST -->
+    <section>
+      <h2>Entries</h2>
+      <ul id="entriesList"></ul>
+    </section>
+  </body>
 </html>
