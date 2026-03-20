@@ -5,5 +5,7 @@ const diaryRouter = Router();
 
 diaryRouter.get("/", diaryController.index);
 diaryRouter.post("/", diaryController.create);
+diaryRouter.get('/:id', diaryController.show);
+diaryRouter.patch('/:id', diaryController.update);
 
 module.exports = diaryRouter;
