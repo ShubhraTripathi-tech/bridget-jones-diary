@@ -3,11 +3,15 @@ require("dotenv").config();
 
 const db = require("./connect");
 
-const sql = fs.readFileSync('./db/diary.sql').toString();
+
+const path = require("path")
+const sql = fs.readFileSync(path.join(__dirname, "diary.sql")).toString();
 
 db.query(sql)
-    .then(data => {
-        db.end();
-        console.log("Set-up complete.");
-    })
-    .catch(error => console.log(error));
+  .then(() => {
+    console.log(" SQL executed successfully");
+    db.end();
+  })
+  .catch(error => {
+    console.error(" ERROR:", error);
+  });
