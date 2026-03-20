@@ -131,3 +131,92 @@ A successful response will return a JSON array of diary entry objects, similar t
   }
 ]
 ```
+
+## Get a Single Diary Entry
+
+### Example Response
+
+Retrieve a specific entry by ID:
+
+```json
+curl -X GET http://localhost:<port>/api/diaries/1
+
+{
+  "id": 1,
+  "title": "Morning Reflection",
+  "content": "Today I felt productive.",
+  "category": "Personal",
+  "created_at": "2026-03-20T08:30:00.000Z"
+}
+```
+
+## Create New Diary Entry
+
+### Example Request and Response
+
+```json
+curl -X POST http://localhost:<port>/api/diaries \
+-H "Content-Type: application/json" \
+-d '{
+  "title": "Evening Thoughts",
+  "content": "Had a relaxing day at home.",
+  "category": "Personal",
+  "created_at": "2026-03-20T19:00:00.000Z"
+}'
+
+{
+  "id": 3,
+  "title": "Evening Thoughts",
+  "content": "Had a relaxing day at home.",
+  "category": "Personal",
+  "created_at": "2026-03-20T19:00:00.000Z"
+}
+```
+
+## Update Diary Entry
+
+### Example Request and Response
+
+```json
+curl -X PATCH http://localhost:<port>/api/diaries/3 \
+-H "Content-Type: application/json" \
+-d '{
+  "title": "Evening Thoughts Updated",
+  "content": "Had a productive day at home.",
+  "category": "Personal"
+}'
+
+{
+  "id": 3,
+  "title": "Evening Thoughts Updated",
+  "content": "Had a productive day at home.",
+  "category": "Personal",
+  "created_at": "2026-03-20T19:00:00.000Z"
+}
+```
+
+## Delete Diary Entry
+
+### Example Request
+
+```json
+curl -X DELETE http://localhost:<port>/api/diaries/3
+```
+
+## Search Diary Entries
+
+### Example Request and Response
+
+```json
+curl -X GET "http://localhost:<port>/api/diaries/search?category=Work&year=2026&month=3"
+
+[
+  {
+    "id": 2,
+    "title": "Work Update",
+    "content": "Finished my backend API.",
+    "category": "Work",
+    "created_at": "2026-03-19T14:00:00.000Z"
+  }
+]
+```
