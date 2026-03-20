@@ -3,7 +3,7 @@ body {
   max-width: 800px;
   margin: auto;
   padding: 20px;
-  background-color: #f7f7f7;
+  background-color: #ccf0d2;
 }
 
 .banner {
@@ -14,8 +14,8 @@ body {
   margin-left: -50vw;
   margin-right: -50vw;
   height: 300px;
-  background: 
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGdhejQ5cjR5b2w4endnczlkNHlnbzEwaW45cDBsNjU4eTE3c2IxbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S3KhNnHajzZ4voJKYP/giphy.gif");
   background-size: cover;
   background-position: center;
@@ -30,7 +30,7 @@ h1 {
 }
 
 section {
-  background: white;
+  background: rgb(187, 168, 179);
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 8px;

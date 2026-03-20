@@ -1,38 +1,52 @@
 const API_URL = "http://localhost:5000/api/diaries";
 
 let editingId = null;
+let expandedId = null;
 
-// Load entries
+// Load entries and render to page
 async function loadEntries() {
   const res = await fetch(API_URL);
-  const data = await res.json();
-  renderEntries(data);
-}
+  const entries = await res.json();
 
-// Render entries
-function renderEntries(entries) {
   const list = document.getElementById("entriesList");
   list.innerHTML = "";
 
-  entries.forEach((entry) => {
-    const li = document.createElement("li");
+  entries.forEach((e) => {
+    const isExpanded = expandedId === e.id;
 
-    li.innerHTML = `
-      <h3>${entry.title}</h3>
-      <p>${entry.content}</p>
-      <small>${entry.category} | ${entry.created_at}</small>
+    list.innerHTML += `
+      <li>
+        <!-- TITLE (click to expand) -->
+        <h3 onclick="toggleDetails(${e.id})" style="cursor:pointer;">
+          ${e.title}
+        </h3>
 
-      <div class="actions">
-        <button onclick="startEdit(${entry.id}, '${entry.content}')">Edit</button>
-        <button onclick="deleteEntry(${entry.id})">Delete</button>
-      </div>
+        <!-- DETAILS (only show if clicked) -->
+        ${
+          isExpanded
+            ? `
+          <p>${e.content}</p>
+          <small>${e.category} | ${e.created_at}</small><br>
+
+          <button onclick="editEntry(${e.id}, \`${e.title}\`, \`${e.content}\`, \`${e.category}\`)">
+            Edit
+          </button>
+          <button onclick="deleteEntry(${e.id})">Delete</button>
+        `
+            : ""
+        }
+      </li>
     `;
-
-    list.appendChild(li);
   });
 }
 
-// CREATE / UPDATE handler
+// Toggle details view
+function toggleDetails(id) {
+  expandedId = expandedId === id ? null : id;
+  loadEntries();
+}
+
+// Create / Update form submission
 document.getElementById("entryForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -44,23 +58,17 @@ document.getElementById("entryForm").addEventListener("submit", async (e) => {
   };
 
   if (editingId) {
-    // UPDATE
     await fetch(`${API_URL}/${editingId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ content: entry.content }),
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entry),
     });
 
     editingId = null;
   } else {
-    // CREATE
     await fetch(API_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(entry),
     });
   }
@@ -69,40 +77,21 @@ document.getElementById("entryForm").addEventListener("submit", async (e) => {
   loadEntries();
 });
 
-// Delete
+// Delete function
 async function deleteEntry(id) {
-  await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
-
+  await fetch(`${API_URL}/${id}`, { method: "DELETE" });
   loadEntries();
 }
 
-// Start editing
-function startEdit(id, content) {
+// Edit → fills form with existing data and scrolls to top
+function editEntry(id, title, content, category) {
   editingId = id;
 
+  document.getElementById("title").value = title;
   document.getElementById("content").value = content;
+  document.getElementById("category").value = category;
 
-  alert("Editing mode enabled. Update the content and submit.");
-}
-
-// Search
-async function searchEntries() {
-  const category = document.getElementById("searchCategory").value;
-  const year = document.getElementById("searchYear").value;
-  const month = document.getElementById("searchMonth").value;
-
-  const params = new URLSearchParams();
-
-  if (category) params.append("category", category);
-  if (year) params.append("year", year);
-  if (month) params.append("month", month);
-
-  const res = await fetch(`${API_URL}/search?${params}`);
-  const data = await res.json();
-
-  renderEntries(data);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Initial load
