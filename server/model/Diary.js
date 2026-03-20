@@ -51,5 +51,23 @@ class Diary {
     );
     return new Diary(result.rows[0]);
   }
+
+  // for update
+static async update(id, data) {
+  const res = await db.query(
+    `UPDATE entries
+     SET title=$1, content=$2, category=$3
+     WHERE post_id=$4
+     RETURNING *`,
+    [data.title, data.content, data.category, id]
+  );
+  if (res.rows.length !== 1) throw new Error('Update failed');
+  return res.rows[0];
 }
+
+
+}
+
+
+
 module.exports = Diary;
