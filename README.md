@@ -220,3 +220,51 @@ curl -X GET "http://localhost:<port>/api/diaries/search?category=Work&year=2026&
   }
 ]
 ```
+
+## Frontend Usage
+
+The application includes a simple client interface built with HTML, CSS, and JavaScript.
+
+### Features
+
+- Add new diary entries using the form
+- View all entries in a list
+- Edit an entry’s content
+- Delete entries
+- Search entries by category and date
+
+### Running the Client
+
+- Open the `client/index.html` file in your browser
+- Ensure the backend server is running on the correct port
+
+---
+
+## Project Structure
+
+The project follows an MVC architecture:
+bridget-jones-diary/
+│
+├── client/
+│ ├── index.html
+│ ├── script.js
+│ └── style.css
+│
+├── server/
+│ ├── controllers/
+│ ├── db/
+│ ├── model/
+│ ├── routes/
+│ ├── app.js
+│ └── index.js
+
+
+### Structure Overview
+
+- **client/** → Frontend UI
+- **controllers/** → Handles request/response logic
+- **model/** → Database queries and data handling
+- **routes/** → API route definitions
+- **db/** → Database connection and setup scripts
+
+---
