@@ -48,7 +48,6 @@ async function show(req, res) {
   }
 }
 
-
 async function update(req, res) {
   try {
     const updated = await Diary.update(req.params.id, req.body);
@@ -57,7 +56,22 @@ async function update(req, res) {
     res.status(404).json({ error: err.message });
   }
 }
+async function search(req, res) {
+  try {
+    const { category, year, month, day } = req.query;
 
+    const results = await Diary.search({
+      category,
+      year,
+      month,
+      day,
+    });
+
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
 
 module.exports = {
   create,
@@ -65,4 +79,5 @@ module.exports = {
   show,
   update,
   destroy,
+  search,
 };

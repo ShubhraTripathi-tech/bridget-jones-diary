@@ -53,21 +53,53 @@ class Diary {
   }
 
   // for update
-static async update(id, data) {
-  const res = await db.query(
-    `UPDATE entries
+  static async update(id, data) {
+    const res = await db.query(
+      `UPDATE entries
      SET title=$1, content=$2, category=$3
      WHERE post_id=$4
      RETURNING *`,
-    [data.title, data.content, data.category, id]
-  );
-  if (res.rows.length !== 1) throw new Error('Update failed');
-  return res.rows[0];
+      [data.title, data.content, data.category, id],
+    );
+    if (res.rows.length !== 1) throw new Error("Update failed");
+    return res.rows[0];
+  }
+  // search entries by category and/or date
+  static async search({ category, year, month, day }) {
+    let query = `SELECT * FROM entries WHERE 1=1`;
+    const values = [];
+    let index = 1;
+
+    if (category) {
+      query += ` AND category ILIKE $${index}`;
+      values.push(`%${category}%`);
+      index++;
+    }
+
+    if (year) {
+      query += ` AND EXTRACT(YEAR FROM created_at) = $${index}`;
+      values.push(year);
+      index++;
+    }
+
+    if (month) {
+      query += ` AND EXTRACT(MONTH FROM created_at) = $${index}`;
+      values.push(month);
+      index++;
+    }
+
+    if (day) {
+      query += ` AND EXTRACT(DAY FROM created_at) = $${index}`;
+      values.push(day);
+      index++;
+    }
+
+    query += ` ORDER BY created_at DESC`;
+
+    const result = await db.query(query, values);
+
+    return result.rows.map((row) => new Diary(row));
+  }
 }
-
-
-}
-
-
 
 module.exports = Diary;

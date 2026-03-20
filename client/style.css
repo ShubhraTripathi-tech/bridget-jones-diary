@@ -3,8 +3,8 @@ body {
   max-width: 800px;
   margin: auto;
   padding: 20px;
-  background-color: white;
-} 
+  background-color: #f7f7f7;
+}
 
 .banner {
   width: 100vw;
@@ -26,58 +26,38 @@ body {
 }
 
 h1 {
-  color: white;
-  font-size: 20vh;
-  margin: 0;
+  text-align: center;
 }
 
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
+section {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
 }
 
-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-}
-
-input, textarea, button {
-  padding: 12px;
-  font-size: 16px;
-  border: 0px;
-  background-color: #d6c6c6;
-  border-radius: 6px;
-  box-sizing: border-box;
+input,
+textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
 }
 
 button {
-  background-color: #ed018c;
-  color: white;
-  border: none;
+  padding: 8px 12px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-right: 5px;
 }
 
-button:hover {
-  background-color: #c7007a;
+li {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
 }
 
-#entries {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.entry {
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fafafa;
+.actions {
+  margin-top: 10px;
 }
 
 #searchInput {
